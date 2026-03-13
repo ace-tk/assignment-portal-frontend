@@ -3,6 +3,10 @@ import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/PrivateRoute';
 import TeacherRoute from './components/TeacherRoute';
 import StudentRoute from './components/StudentRoute';
+import TeacherLayout from './layouts/TeacherLayout';
+import TeacherDashboard from './pages/teacher/TeacherDashboard';
+import TeacherAssignments from './pages/teacher/TeacherAssignments';
+import TeacherSubmissions from './pages/teacher/TeacherSubmissions';
 
 function App() {
   return (
@@ -12,16 +16,20 @@ function App() {
       
       {/* Protected Teacher Routes */}
       <Route 
-        path="/teacher/*" 
+        path="/teacher" 
         element={
           <PrivateRoute>
             <TeacherRoute>
-              {/* Note: In Task 5 and beyond, we will replace this div with TeacherLayout and nested routes */}
-              <div className="p-8">Teacher Dashboard Placeholder</div>
+              <TeacherLayout />
             </TeacherRoute>
           </PrivateRoute>
         } 
-      />
+      >
+        <Route path="dashboard" element={<TeacherDashboard />} />
+        <Route path="assignments" element={<TeacherAssignments />} />
+        <Route path="submissions" element={<TeacherSubmissions />} />
+        <Route path="" element={<Navigate to="/teacher/dashboard" replace />} />
+      </Route>
 
       {/* Protected Student Routes */}
       <Route 
