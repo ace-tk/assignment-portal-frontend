@@ -3,10 +3,11 @@ import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/PrivateRoute';
 import TeacherRoute from './components/TeacherRoute';
 import StudentRoute from './components/StudentRoute';
-import TeacherLayout from './layouts/TeacherLayout';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import TeacherAssignments from './pages/teacher/TeacherAssignments';
 import TeacherSubmissions from './pages/teacher/TeacherSubmissions';
+import StudentLayout from './layouts/StudentLayout';
+import StudentDashboard from './pages/student/StudentDashboard';
 
 function App() {
   return (
@@ -33,16 +34,20 @@ function App() {
 
       {/* Protected Student Routes */}
       <Route 
-        path="/student/*" 
+        path="/student" 
         element={
           <PrivateRoute>
             <StudentRoute>
-               {/* Note: In Task 9 and beyond, we will replace this div with StudentLayout and nested routes */}
-              <div className="p-8">Student Dashboard Placeholder</div>
+               <StudentLayout />
             </StudentRoute>
           </PrivateRoute>
         } 
-      />
+      >
+        <Route path="dashboard" element={<StudentDashboard />} />
+        {/* Placeholder for Assignment Detail (Task 10) */}
+        <Route path="assignment/:id" element={<div className="p-8 text-xl font-bold">Assignment Detail View (Coming in Task 10)</div>} />
+        <Route path="" element={<Navigate to="/student/dashboard" replace />} />
+      </Route>
 
       {/* Default Fallback Route */}
       <Route path="/" element={<Navigate to="/login" replace />} />
