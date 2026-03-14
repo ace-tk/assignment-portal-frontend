@@ -6,6 +6,7 @@ import StudentRoute from './components/StudentRoute';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import TeacherAssignments from './pages/teacher/TeacherAssignments';
 import TeacherSubmissions from './pages/teacher/TeacherSubmissions';
+import TeacherLayout from './layouts/TeacherLayout';
 import StudentLayout from './layouts/StudentLayout';
 import StudentDashboard from './pages/student/StudentDashboard';
 import StudentAssignmentDetail from './pages/student/StudentAssignmentDetail';

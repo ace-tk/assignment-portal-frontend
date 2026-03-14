@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import assignmentService from '../../services/assignmentService';
-import studentAssignmentCard from '../../components/student/StudentAssignmentCard';
 import StudentAssignmentCard from '../../components/student/StudentAssignmentCard';
 
 const StudentDashboard = () => {
