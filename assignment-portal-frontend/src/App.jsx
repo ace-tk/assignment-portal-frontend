@@ -8,11 +8,15 @@ import TeacherAssignments from './pages/teacher/TeacherAssignments';
 import TeacherSubmissions from './pages/teacher/TeacherSubmissions';
 import StudentLayout from './layouts/StudentLayout';
 import StudentDashboard from './pages/student/StudentDashboard';
+import StudentAssignmentDetail from './pages/student/StudentAssignmentDetail';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <Routes>
-      {/* Public Route */}
+    <>
+      <Toaster position="top-right" />
+      <Routes>
+        {/* Public Route */}
       <Route path="/login" element={<LoginPage />} />
       
       {/* Protected Teacher Routes */}
@@ -44,14 +48,14 @@ function App() {
         } 
       >
         <Route path="dashboard" element={<StudentDashboard />} />
-        {/* Placeholder for Assignment Detail (Task 10) */}
-        <Route path="assignment/:id" element={<div className="p-8 text-xl font-bold">Assignment Detail View (Coming in Task 10)</div>} />
+        <Route path="assignment/:id" element={<StudentAssignmentDetail />} />
         <Route path="" element={<Navigate to="/student/dashboard" replace />} />
       </Route>
 
       {/* Default Fallback Route */}
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
+    </>
   );
 }
 

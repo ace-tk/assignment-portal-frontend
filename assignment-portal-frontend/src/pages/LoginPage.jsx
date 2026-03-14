@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
@@ -39,16 +40,20 @@ const LoginPage = () => {
       
       // Role-based redirect
       if (user?.role === 'teacher') {
+        toast.success(`Welcome back, ${user.name || 'Teacher'}!`);
         navigate('/teacher/dashboard');
       } else if (user?.role === 'student') {
+        toast.success(`Welcome back, ${user.name || 'Student'}!`);
         navigate('/student/dashboard');
       } else {
-         // Fallback incase role is missing somehow
+         toast.success('Login successful');
          navigate('/');
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.response?.data?.message || 'Invalid email or password. Please try again.');
+      const errMsg = err.response?.data?.message || 'Invalid email or password. Please try again.';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

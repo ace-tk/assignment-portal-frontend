@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import assignmentService from '../../services/assignmentService';
 
 const AssignmentModal = ({ isOpen, onClose, assignment, onSaved }) => {
@@ -50,17 +51,21 @@ const AssignmentModal = ({ isOpen, onClose, assignment, onSaved }) => {
     try {
       setLoading(true);
       if (assignment) {
-        // Edit mode (assuming we can only edit drafts)
+        // Edit mode
         await assignmentService.updateAssignment(assignment._id, formData);
+        toast.success('Assignment updated successfully');
       } else {
         // Create mode
         await assignmentService.createAssignment(formData);
+        toast.success('Assignment created successfully');
       }
-      onSaved(); // Callback to refresh the list in the parent component
+      onSaved();
       onClose();
     } catch (err) {
       console.error('Error saving assignment:', err);
-      setError(err.response?.data?.message || 'Failed to save assignment. Please try again.');
+      const errMsg = err.response?.data?.message || 'Failed to save assignment.';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

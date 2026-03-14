@@ -1,114 +1,65 @@
-# Assignment Workflow Portal – Frontend
+# Assignment Portal Frontend
 
-## Overview
+A modern, responsive React-based frontend application for managing homework assignments and student submissions. 
 
-This project is the **frontend application** for the Assignment Workflow Portal built using **React.js**.
-
-The portal allows teachers and students to log in through a **single login page** and access role-based dashboards.
-
-After authentication:
-
-* Teachers are redirected to the **Teacher Dashboard**
-* Students are redirected to the **Student Dashboard**
-
----
+Built with **ReactJS (Vite)**, **Tailwind CSS**, and **React Router v7**.
 
 ## Features
 
-### Login
-
-* Single login page for both teachers and students
-* Users enter **email and password**
-* After authentication, users are redirected based on their role
+### Authentication
+- Unified login system with JWT handling.
+- Role-based routing automatically directing users to the Teacher or Student dashboards.
+- Protected routes ensuring security.
 
 ### Teacher Dashboard
-
-Teachers can manage the lifecycle of assignments.
-
-Each assignment contains:
-
-* Title
-* Description
-* Due Date
-* Status
-
-Assignment workflow:
-Draft → Published → Completed
-
-Teacher capabilities:
-
-* Create assignments
-* Edit assignments in Draft state
-* Delete assignments in Draft state
-* Publish assignments
-* Mark assignments as Completed
-* View student submissions
+- **Analytics Overview**: View high-level metrics (Total Assignments, Drafts, Published, Completed).
+- **Assignment Management**: 
+  - Create, read, update, and delete (CRUD) capabilities via a clean modal interface.
+  - Tabbed filtering system to separate Drafts, Published, and Completed work.
+  - Easy 1-click publishing.
+- **Submissions Review**: 
+  - Select an assignment to view all student answers in a structured list.
+  - Instantly mark submissions as "Reviewed" with optimistic UI updates.
 
 ### Student Dashboard
+- **My Assignments**: Grid view of all published materials tailored to the student.
+- **Detailed Workflow**: Visual alerts on cards for "Pending", "Submitted", and "Overdue" status.
+- **One-Time Submission**: Beautiful detail view that accepts answers and locks down the form once submitted or if the deadline passes.
 
-Students can:
+## Prerequisites
 
-* View **Published assignments**
-* Submit answers (text-based)
-* View their submitted answers
+- Node.js (v16.0 or higher recommended)
+- npm or yarn
 
-Restrictions:
+## Installation & Setup
 
-* Only one submission per assignment
-* Submitted answers cannot be edited
+1. **Clone the repository** (or navigate to the project directory if provided):
+   ```bash
+   cd assignment-portal-frontend
+   ```
 
----
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Technology Used
+3. **Configure Environment Variables**:
+   Create a `.env` file in the root of the project with your API path if it differs from the default:
+   ```env
+   VITE_API_URL=http://localhost:5000/api
+   ```
 
-* React.js
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
----
+5. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
-## Setup Instructions
-
-Clone the repository:
-
-git clone <repository-url>
-
-Navigate to the project directory:
-
-cd assignment-portal-frontend
-
-Install dependencies:
-
-npm install
-
-Start the development server:
-
-npm run dev
-
-The application will run locally on:
-
-http://localhost:5173
-
----
-
-## Project Structure
-
-src/
-components/
-pages/
-App.jsx
-main.jsx
-
----
-
-## Notes
-
-* The frontend communicates with the backend APIs for authentication and assignment management.
-* Role-based UI rendering ensures teachers and students see only relevant features.
-* Basic form validation and error handling are implemented on the client side.
-
----
-
-## Future Enhancements
-
-* Pagination for assignment lists
-* Prevent submissions after due date
-* Dashboard analytics
+## Design Notes
+- **Tailwind CSS** handles all styling, providing a clean, responsive layout heavily utilizing flexbox, grids, and Tailwind's built-in color palettes.
+- **React Hot Toast** is used across the application to provide non-intrusive feedback for actions like logging in, creating assignments, or throwing errors.
+- **Axios Interceptors** manage all JWT header attachments and handle global 401 unauthenticated drops smoothly.
